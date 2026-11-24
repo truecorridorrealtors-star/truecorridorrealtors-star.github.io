@@ -1,0 +1,93 @@
+// Generates the simple sub-pages (privacy, thank-you, 404) from one shell
+// so header/footer stay identical. Run: node build-pages.js
+const fs = require('fs');
+const path = require('path');
+
+const head = (title, desc, noindex) => `<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${title} | True Corridor Realtors</title>
+  <meta name="description" content="${desc}">
+  ${noindex ? '<meta name="robots" content="noindex">' : ''}
+  <meta name="theme-color" content="#1B2A41">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="page-head">
+  <header class="site-header scrolled">
+    <div class="wrap header-row">
+      <a class="brand" href="/" aria-label="True Corridor Realtors, home">
+        <img src="/assets/img/TCR-logo-horizontal-white.svg" alt="True Corridor Realtors" width="226" height="40">
+      </a>
+      <nav class="nav nav-static"><a href="/#contact" class="nav-cta">Book a consultation</a></nav>
+    </div>
+  </header>
+  <main class="page" style="background:var(--paper)">
+    <div class="wrap prose">`;
+
+const foot = `
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <img src="/assets/img/TCR-logo-horizontal-white.svg" alt="True Corridor Realtors" width="200" height="35">
+      <p>Premium real estate advisory · Delhi NCR</p>
+      <nav aria-label="Footer">
+        <a href="https://www.instagram.com/truecorridorrealtors/" rel="noopener" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61597048343919" rel="noopener" target="_blank">Facebook</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+      <p class="copy">© ${new Date().getFullYear()} True Corridor Realtors</p>
+    </div>
+  </footer>
+</body>
+</html>
+`;
+
+const pages = {
+  'privacy.html': [
+    'Privacy policy',
+    'How True Corridor Realtors collects and uses the details you share with us.',
+    false,
+    `<h1>Privacy policy</h1>
+      <p class="muted">Last updated: 24 November 2026</p>
+      <p>True Corridor Realtors ("we", "us") respects your privacy. This page explains what we collect through this website and how we use it.</p>
+      <h2>What we collect</h2>
+      <p>When you submit the enquiry form we receive your name, phone number, email address (if given), the type of property you're interested in, your budget range and any message you write.</p>
+      <h2>How we use it</h2>
+      <p>Only to respond to your enquiry, arrange a consultation and share property options you've asked about. We do not sell or rent your details to anyone.</p>
+      <h2>Who processes it</h2>
+      <p>Form submissions are delivered to our inbox through FormSubmit (formsubmit.co). The site itself is hosted on GitHub Pages. Both may keep standard technical logs such as IP address and browser type.</p>
+      <h2>How long we keep it</h2>
+      <p>We keep enquiry details for as long as we're advising you, and for a reasonable period afterwards for our records, unless you ask us to delete them.</p>
+      <h2>Your choices</h2>
+      <p>You can ask us to see, correct or delete your details at any time by emailing <a href="mailto:truecorridorrealtors@gmail.com">truecorridorrealtors@gmail.com</a>.</p>`
+  ],
+  'thank-you.html': [
+    'Thank you',
+    'Your enquiry has reached True Corridor Realtors.',
+    true,
+    `<h1>Thank you.</h1>
+      <p>Your enquiry has reached us. A senior advisor will call you back within one working day.</p>
+      <p><a class="btn btn-brass" href="/">Back to the homepage</a></p>`
+  ],
+  '404.html': [
+    'Page not found',
+    'This page does not exist.',
+    true,
+    `<h1>This corridor doesn't lead anywhere.</h1>
+      <p>The page you're looking for has moved or never existed.</p>
+      <p><a class="btn btn-brass" href="/">Back to the homepage</a></p>`
+  ]
+};
+
+for (const [file, [title, desc, noindex, body]] of Object.entries(pages)) {
+  fs.writeFileSync(path.join(__dirname, file), head(title, desc, noindex) + '\n      ' + body + foot);
+  console.log('wrote', file);
+}

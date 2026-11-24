@@ -1,0 +1,12 @@
+{
+  "name": "True Corridor Realtors",
+  "short_name": "True Corridor",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1828",
+  "theme_color": "#1B2A41",
+  "icons": [
+    { "src": "/assets/img/apple-touch-icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/img/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
