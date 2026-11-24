@@ -84,7 +84,7 @@ em { font-style: normal; color: var(--brass); }
 .lede { font-size: clamp(1.05rem, 1.6vw, 1.25rem); max-width: 520px; color: rgba(255,255,255,.75); margin: 1.2em 0 2em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 .hero-strip {
-  position: relative; list-style: none; margin-top: auto; padding-top: 70px; padding-bottom: 28px;
+  position: relative; list-style: none; width: 100%; margin-top: auto; padding-top: 70px; padding-bottom: 28px;
   display: flex; flex-wrap: wrap; gap: 10px 40px;
   font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--stone);
 }
