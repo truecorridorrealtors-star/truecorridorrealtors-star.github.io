@@ -26,7 +26,7 @@ Edit the shared header/footer of the sub-pages in `build-pages.js`, then run `no
    Then tick **Enforce HTTPS**.
 3. Until a custom domain exists, the site uses root paths (`/assets/...`) on sub-pages, so either name the repo `<github-username>.github.io` or use the custom domain.
 
-The domain `truecorridorrealtors.com` is assumed in `index.html` (canonical, Open Graph, JSON-LD), `robots.txt` and `sitemap.xml`. Search-replace it if the final domain differs.
+Live at https://truecorridorrealtors-star.github.io/ . That URL is used in `index.html` (canonical, Open Graph, JSON-LD), `robots.txt` and `sitemap.xml`. When a custom domain is added, search-replace it with the new domain.
 
 ## Enquiry form
 
